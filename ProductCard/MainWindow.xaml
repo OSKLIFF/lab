@@ -1,0 +1,47 @@
+﻿<Window ResizeMode="NoResize" x:Class="ProductCard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProductCard"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Height="450" Width="800" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <ComboBox Name="ChooseTypeOfProduct_CB" HorizontalAlignment="Left" IsReadOnly="True" Margin="10,10,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>Продукты питания</ComboBoxItem>
+            <ComboBoxItem>Одежда</ComboBoxItem>
+        </ComboBox>
+        <Button x:Name="GetCardOfChosenProductType_BT" Content="Показать" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="60"/>
+        <Border x:Name="ClothCard_BD" Visibility="Hidden" BorderBrush="Black" BorderThickness="1" Width="250" Height="250" Margin="135,10,415,174">
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Label Content="Название:" Height="30" Width="70" Margin="9,9,169,209" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Label Content="Цена:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="70"/>
+                <Label Content="Размер:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+                <Label Content="Цвет:" HorizontalAlignment="Left" Margin="9,101,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="ClothName_TB" HorizontalAlignment="Left" Margin="84,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="ClothPrice_TB" HorizontalAlignment="Left" Margin="84,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="ClothSize_TB" HorizontalAlignment="Left" Margin="84,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="ClothColor_TB" HorizontalAlignment="Left" Margin="84,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <Button x:Name="SaveChangesForClothCard_BT" Content="Сохранить" HorizontalAlignment="Left" Margin="9,216,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+
+        <Border x:Name="FoodCard_BD" Visibility="Hidden" BorderBrush="Black" BorderThickness="1" Width="250" Height="250" Margin="135,10,415,174">
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Label Content="Название:" Height="30" Width="70" Margin="9,9,169,209" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Label Content="Цена:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="70"/>
+                <Label Content="Калл-ть:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="FoodName_TB" HorizontalAlignment="Left" Margin="84,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="FoodPrice_TB" HorizontalAlignment="Left" Margin="84,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="FoodCcal_TB" Margin="84,72,0,0" TextWrapping="Wrap" Text="" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Button x:Name="SaveChangesForFoodCard_BT" Content="Сохранить" HorizontalAlignment="Left" Margin="9,216,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+        <Label Content="Вывести самый дорогой товар:" HorizontalAlignment="Left" Margin="452,14,0,0" VerticalAlignment="Top"/>
+        <Label Content="Название:" HorizontalAlignment="Left" Margin="452,46,0,0" VerticalAlignment="Top"/>
+        <Label Content="Цена:" HorizontalAlignment="Left" Margin="452,77,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="GetExpensiveName_TB" HorizontalAlignment="Left" Margin="522,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="GetExpensivePrice_TB" HorizontalAlignment="Left" Margin="522,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Name="GetExpensiveInfo_BT" Content="Показать" HorizontalAlignment="Left" Margin="452,121,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
