@@ -17,10 +17,11 @@ namespace ProductCard
         public string Color { get; set; }
 
         #region[Перегрузка конструктора]
-        public Clothes(string name, double price) : base (name, price)
+        public Clothes(string name, double price, int size) : base (name, price)
         {
             Name = name;
             Price = price;
+            Size = size;
         }
         public Clothes()
         {
@@ -29,15 +30,13 @@ namespace ProductCard
         #endregion
 
         /// <summary>
-        /// Переопределенный метод для получения наибольшей суммы товара
+        /// Получение данных товара с самой высокой ценой из списка
         /// </summary>
-        /// <param name="price"></param>
-        /// <param name="products"></param>
+        /// <param name="allProducts"></param>
+        /// <param name="sortedPrice"></param>
         /// <returns></returns>
-        public override List<double> GetMoreExpensive(List<AllProducts> products)
-        {
-            var sort = products.Select(s => s.Price).ToList().OrderByDescending(n => n).ToList();
-            return sort;
-        }
+        public override List<AllProducts> GetInfoForMoreExpensive(List<AllProducts> allProducts, List<double> sortedPrice)
+            => allProducts.Where(w => w.Price == sortedPrice[0]).ToList();
+
     }
 }

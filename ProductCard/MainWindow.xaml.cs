@@ -33,19 +33,33 @@ namespace ProductCard
 
             ChooseTypeOfProduct_CB.DropDownOpened += (object sender, EventArgs e) => { _allProducts.Clear(); }; //Очистка списка 
             SaveChangesForClothCard_BT.Click += SaveChangesForClothCard_BT_Click;
+            SaveChangesForFoodCard_BT.Click += SaveChangesForFoodCard_BT_Click;
             GetExpensiveInfo_BT.Click += GetExpensiveInfoClothes_BT_Click;
         }
 
         /// <summary>
-        /// Сохранение товаров в список _allProducts
+        /// Сохранение товаров(еды) в список _allProducts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveChangesForFoodCard_BT_Click(object sender, RoutedEventArgs e)
+        {
+           
+            _allProducts.Add(new Food(FoodName_TB.Text, double.TryParse(FoodPrice_TB.Text, out double d) ? double.Parse(FoodPrice_TB.Text) : throw new Exception("Не удалось переопределить тип данных !"), int.TryParse(FoodCcal_TB.Text, out int result) ? int.Parse(FoodCcal_TB.Text) : throw new Exception("Не удалось переопределить тип данных !"))
+            {          
+            });
+            ClearAllTextBoxes(ChooseTypeOfProduct_CB.Text);
+        }
+
+        /// <summary>
+        /// Сохранение товаров(одежды) в список _allProducts 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SaveChangesForClothCard_BT_Click(object sender, RoutedEventArgs e)
         {
-            _allProducts.Add(new Clothes(ClothName_TB.Text, double.TryParse(ClothPrice_TB.Text, out double d) ? double.Parse(ClothPrice_TB.Text) : throw new Exception("Не удалось переопределить тип данных !"))
+            _allProducts.Add(new Clothes(ClothName_TB.Text, double.TryParse(ClothPrice_TB.Text, out double d) ? double.Parse(ClothPrice_TB.Text) : throw new Exception("Не удалось переопределить тип данных !"), int.TryParse(ClothSize_TB.Text, out int result) ? int.Parse(ClothSize_TB.Text) : throw new Exception("Не удалось переопределить тип данных !"))
             {
-                Size = Convert.ToInt32(ClothSize_TB.Text),
                 Color = ClothColor_TB.Text
             });
             ClearAllTextBoxes(ChooseTypeOfProduct_CB.Text);
@@ -77,20 +91,34 @@ namespace ProductCard
         }
 
         /// <summary>
-        /// Возвращает самый дорогой товар - одежду
+        /// Возвращает самый дорогой товар - одежду/еду
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void GetExpensiveInfoClothes_BT_Click(object sender, RoutedEventArgs e)
         {
-            var getExpensive = new Clothes();
-            var sorted = getExpensive.GetMoreExpensive(_allProducts);
-            var result = _allProducts.Where(w => w.Price == sorted[0]).ToList();
-            result.ForEach(f =>
+            var getExpensive = new AllProducts();
+            var sortedPrice = getExpensive.GetMoreExpensive(_allProducts);
+            switch (ChooseTypeOfProduct_CB.Text)
             {
-                GetExpensiveName_TB.Text = f.Name;
-                GetExpensivePrice_TB.Text = f.Price.ToString();
-            });           
+                case "Одежда":
+                    var cloth = new Clothes();
+                    cloth.GetInfoForMoreExpensive(_allProducts, sortedPrice).ForEach(f => {
+                        GetExpensiveName_TB.Text = f.Name;
+                        GetExpensivePrice_TB.Text = f.Price.ToString();
+                    });
+                    break;
+                case "Продукты питания":
+                    var food = new Food();
+                    food.GetInfoForMoreExpensive(_allProducts, sortedPrice).ForEach(f => {
+                        GetExpensiveName_TB.Text = f.Name;
+                        GetExpensivePrice_TB.Text = f.Price.ToString();
+                    });
+                    break;
+                                    default:
+                    MessageBox.Show("Не выбрана карточка продуктов!");
+                    break;
+            }          
         }
 
         /// <summary>

@@ -27,12 +27,20 @@ namespace ProductCard
         #endregion[]
 
         /// <summary>
-        /// Метод для использования дочерними классами
+        /// Метод для получения наибольшей суммы товара
         /// </summary>
+        /// <param name="price"></param>
         /// <param name="products"></param>
         /// <returns></returns>
+        public List<double> GetMoreExpensive(List<AllProducts> products)
+             => products.Select(s => s.Price).ToList().OrderByDescending(n => n).ToList();
+
+        /// <summary>
+        /// Метод для переопределения дочерними классами
+        /// </summary>
+        /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual List<double> GetMoreExpensive(List<AllProducts> products)
+        public virtual List<AllProducts> GetInfoForMoreExpensive(List<AllProducts> allProducts, List<double> sortedPrice)
             => throw new NotImplementedException();
     }
 }
